@@ -8,7 +8,8 @@
     "build": "rimraf ./build && tsc",
     "dev": "nodemon",
     "lint": "eslint ./src/*.ts",
-    "format": "eslint *.ts --fix"
+    "format": "eslint *.ts --fix",
+    "prettier-format": "prettier --config .prettierrc 'src/**/*.ts' --write"
   },
   "author": "",
   "license": "ISC",
@@ -22,6 +23,7 @@
     "@typescript-eslint/parser": "^4.29.2",
     "eslint": "^7.32.0",
     "nodemon": "^2.0.12",
+    "prettier": "^2.3.2",
     "ts-node": "^10.2.1",
     "typescript": "^4.3.5"
   }
