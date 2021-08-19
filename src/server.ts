@@ -1,14 +1,18 @@
 import express from 'express';
 import dotenv = require('dotenv');
 
+//load env variables
+dotenv.config({ path: './config/config.env' });
+
 //Packages
 import morgan = require('morgan');
 
 //Routes
 import chores = require('./routes/chores');
+import connectDB = require('./config/db');
 
-//load env variables
-dotenv.config({ path: './config/config.env' });
+console.log(process.env);
+// connectDB();
 
 //set express && port
 const app = express();
