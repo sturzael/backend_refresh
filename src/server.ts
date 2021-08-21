@@ -1,18 +1,17 @@
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+require('dotenv').config({ path: __dirname + '/config/.env' });
+
 import express from 'express';
-import dotenv = require('dotenv');
-
-//load env variables
-dotenv.config({ path: './config/config.env' });
-
 //Packages
 import morgan = require('morgan');
-
+import colors from 'colors';
 //Routes
 import chores = require('./routes/chores');
-import connectDB = require('./config/db');
 
-console.log(process.env);
-// connectDB();
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+const connectDB = require('./config/db');
+
+connectDB();
 
 //set express && port
 const app = express();
@@ -24,7 +23,16 @@ app.use(morgan('dev'));
 //Mount Router
 app.use('/api/v1/chores', chores);
 
-app.listen(
+const server = app.listen(
   port,
-  console.log(`Server running on port ${port} in ${process.env.NODE_ENV}`)
+  console.log(
+    `Server running on port ${port} in ${process.env.NODE_ENV}`.yellow.bold
+  )
 );
+
+//rejection handling
+process.on('unhandledRejection', (err: any) => {
+  console.log(`Unhandled rejection error: ${err.message} `);
+
+  server.close(() => process.exit(1));
+});
