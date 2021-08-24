@@ -18,6 +18,9 @@ connectDB();
 const app = express();
 const port = process.env.PORT || 5000;
 
+// Body parser
+app.use(express.json());
+
 //Middleware
 app.use(morgan('dev'));
 
