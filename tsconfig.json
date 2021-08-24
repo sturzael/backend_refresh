@@ -12,7 +12,8 @@
     /* Advanced Options */
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
-    "noImplicitUseStrict": true
+    "noImplicitUseStrict": true,
+    "allowSyntheticDefaultImports": true
   },
   "lib": ["es2018"],
   "include": ["src/**/*"],
