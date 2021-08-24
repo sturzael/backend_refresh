@@ -1,6 +1,24 @@
 import mongoose from 'mongoose';
 
-const BootcampSchema = new mongoose.Schema({
+interface BootcampType {
+  name: string;
+  slug: string;
+  description: string;
+  website: string;
+  phone: string;
+  email: string;
+  address: string;
+  location: unknown;
+  careers: string;
+  averageRating: number;
+  averageCost: number;
+  photo: string;
+  jobAssistance: boolean;
+  jobGuarantee: boolean;
+  createdAt: Date;
+}
+
+const BootcampSchema = new mongoose.Schema<BootcampType>({
   name: {
     type: String,
     required: [true, 'Please add a name'],
@@ -27,10 +45,7 @@ const BootcampSchema = new mongoose.Schema({
   },
   email: {
     type: String,
-    maxLength: [
-      /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
-      'Please enter a valid string'
-    ]
+    match: [/^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/, 'Please enter a valid string']
   },
   address: {
     type: String,
@@ -41,12 +56,12 @@ const BootcampSchema = new mongoose.Schema({
     type: {
       type: String,
       enum: ['Point'],
-      required: true
+      required: false
     },
     coordinates: {
       inedx: '2dsphere',
       type: [Number],
-      required: true
+      required: false
     },
     formattedAddress: String,
     street: String,
@@ -95,4 +110,4 @@ const BootcampSchema = new mongoose.Schema({
   }
 });
 
-module.exports = mongoose.model('Bootcamps', BootcampSchema);
+module.exports = mongoose.model('Bootcamp', BootcampSchema);
