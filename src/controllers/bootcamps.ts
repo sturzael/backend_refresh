@@ -1,5 +1,6 @@
 import { Request, Response } from 'express';
-import Bootcamps = require('../models/Bootcamps');
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+const Bootcamp = require('../models/Bootcamps');
 
 ////////////////////////////////
 // Controllers
@@ -22,8 +23,13 @@ exports.getSingleBootcamp = (req: Request, res: Response, next: any) => {
 // @desc       Create a bootcamp
 // @route      POST /api/v1/chores
 // @access     Private
-exports.createBootcamp = (req: Request, res: Response, next: any) => {
-  res.status(200).json({ success: true, msg: 'post new bootcamp' });
+exports.createBootcamp = async (req: Request, res: Response, next: any) => {
+  try {
+    const bootcamp = await Bootcamp.create(req.body);
+    res.status(201).json({ success: true, data: bootcamp });
+  } catch (error) {
+    res.status(400).json({ success: false });
+  }
 };
 
 // @desc       Update a bootcamp
