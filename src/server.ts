@@ -2,9 +2,10 @@
 require('dotenv').config({ path: __dirname + '/config/.env' });
 
 import express from 'express';
+
 //Packages
 import morgan = require('morgan');
-import colors from 'colors';
+import colors = require('colors');
 //Routes
 import chores = require('./routes/chores');
 
@@ -26,13 +27,15 @@ app.use('/api/v1/chores', chores);
 const server = app.listen(
   port,
   console.log(
-    `Server running on port ${port} in ${process.env.NODE_ENV}`.yellow.bold
+    colors.yellow.bold(
+      `Server running on port ${port} in ${process.env.NODE_ENV}`
+    )
   )
 );
 
 //rejection handling
 process.on('unhandledRejection', (err: any) => {
-  console.log(`Unhandled rejection error: ${err.message} `);
+  console.log(colors.red(`Unhandled rejection error: ${err.message} `));
 
   server.close(() => process.exit(1));
 });
