@@ -1,6 +1,6 @@
 import mongoose from 'mongoose';
 
-const ChoreSchema = new mongoose.Schema({
+const BootcampSchema = new mongoose.Schema({
   name: {
     type: String,
     required: [true, 'Please add a name'],
@@ -95,4 +95,4 @@ const ChoreSchema = new mongoose.Schema({
   }
 });
 
-module.exports = mongoose.model('Chores', ChoreSchema);
+module.exports = mongoose.model('Bootcamps', BootcampSchema);

@@ -7,7 +7,7 @@ import express from 'express';
 import morgan = require('morgan');
 import colors = require('colors');
 //Routes
-import chores = require('./routes/chores');
+import bootcamps = require('./routes/bootcamps');
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const connectDB = require('./config/db');
@@ -22,7 +22,7 @@ const port = process.env.PORT || 5000;
 app.use(morgan('dev'));
 
 //Mount Router
-app.use('/api/v1/chores', chores);
+app.use('/api/v1/bootcamps', bootcamps);
 
 const server = app.listen(
   port,
