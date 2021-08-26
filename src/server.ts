@@ -1,11 +1,14 @@
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 require('dotenv').config({ path: __dirname + '/config/.env' });
 
-import express from 'express';
-
 //Packages
+import express from 'express';
 import morgan = require('morgan');
 import colors = require('colors');
+
+//Middleware
+import errorHandler = require('./middleware/error');
+
 //Routes
 import bootcamps = require('./routes/bootcamps');
 
@@ -26,6 +29,9 @@ app.use(morgan('dev'));
 
 //Mount Router
 app.use('/api/v1/bootcamps', bootcamps);
+
+//Error handler
+app.use(errorHandler);
 
 const server = app.listen(
   port,

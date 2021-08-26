@@ -2,6 +2,9 @@ import { Request, Response } from 'express';
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const Bootcamp = require('../models/Bootcamps');
 
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+const ErrorResponse = require('../utils/errorResponse');
+
 ////////////////////////////////
 // Controllers
 ////////////////////////////////
@@ -30,7 +33,7 @@ exports.getSingleBootcamp = async (req: Request, res: Response, next: any) => {
 
     res.status(200).json({ success: true, data: bootcamp });
   } catch (error) {
-    res.status(400).json({ success: false });
+    next(new ErrorResponse(`Bootcamp not found with ID ${req.params.id}`, 404));
   }
 };
 
