@@ -29,10 +29,14 @@ exports.getBootcamps = async (req: Request, res: Response, next: any) => {
 exports.getSingleBootcamp = async (req: Request, res: Response, next: any) => {
   try {
     const bootcamp = await Bootcamp.findById(req.params.id);
-    if (!bootcamp) return res.status(400).json({ success: false });
+    if (!bootcamp)
+      next(
+        new ErrorResponse(`Bootcamp not found with ID ${req.params.id}`, 404)
+      );
 
     res.status(200).json({ success: true, data: bootcamp });
-  } catch (error) {
+  } catch (err) {
+    // next(err);
     next(new ErrorResponse(`Bootcamp not found with ID ${req.params.id}`, 404));
   }
 };
